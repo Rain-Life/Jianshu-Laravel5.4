@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,8 +15,8 @@ class PostController extends Controller
     */
     public function index()
     {
-
-        return view('post/index');
+        $posts = Post::orderBy('created_at', 'desc')->paginate(6);
+        return view('post/index', compact('posts'));
     }
     /**
      * 文章详情页
@@ -23,9 +24,9 @@ class PostController extends Controller
      * @author chenxingsheng
      * @time 2019-11-19
      */
-    public function show()
+    public function show(Post $post)
     {
-        return view('post/show');
+        return view('post/show', compact('post'));
     }
     /**
      * 创建文章页
@@ -45,7 +46,9 @@ class PostController extends Controller
      */
     public function store()
     {
+        $post = Post::create(request(['title', 'content']));
 
+        return redirect('/posts');
     }
     /**
      * 编辑文章页

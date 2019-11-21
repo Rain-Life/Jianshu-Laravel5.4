@@ -36,10 +36,10 @@
             <div>
                 @foreach($posts as $item)
                 <div class="blog-post">
-                    <h2 class="blog-post-title"><a href="/posts/62" >{{$item->title}}</a></h2>
+                    <h2 class="blog-post-title"><a href="/posts/{{$item->id}}" >{{$item->title}}</a></h2>
                     <p class="blog-post-meta">{{$item->created_at->toFormattedDateString()}} by <a href="/user/5">Kassandra Ankunding2</a></p>
 
-                    <p>{{str_limit($item->content, 100, '...')}}
+                    {!! str_limit($item->content, 100, '...') !!}
                     <p class="blog-post-meta">赞 0  | 评论 0</p>
                 </div>
                 @endforeach

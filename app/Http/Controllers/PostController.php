@@ -62,9 +62,9 @@ class PostController extends Controller
      * @author chenxingsheng
      * @time 2019-11-19
      */
-    public function edit()
+    public function edit(Post $post)
     {
-        return view('post/edit');
+        return view('post/edit', compact('post'));
     }
     /**
      * 编辑文章逻辑
@@ -72,9 +72,18 @@ class PostController extends Controller
      * @author chenxingsheng
      * @time 2019-11-19
      */
-    public function update()
+    public function update(Post $post)
     {
+        //验证
+        $this->validate(request(), [
+            'title' => 'required|string|max:100|min:5',
+            'content' => 'required|string|min:10'
+        ]);
+        $post->title = request('title');
+        $post->content = request('content');
+        $post->save();
 
+        return redirect("/posts/{$post->id}");
     }
     /**
      * 删除文章
@@ -82,9 +91,13 @@ class PostController extends Controller
      * @author chenxingsheng
      * @time 2019-11-19
      */
-    public function delete()
+    public function delete(Post $post)
     {
+        //TODO:用户权限验证
 
+        $post->delete();
+
+        return redirect('/posts');
     }
     /**
      * 图片上传

@@ -46,4 +46,4 @@ Route::get('/posts/{post}/delete', '\App\Http\Controllers\PostController@delete'
 //富文本编辑器图片上传
 Route::post('/posts/image/upload', '\App\Http\Controllers\PostController@imageUpload');
 
-
+//再测试一下

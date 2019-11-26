@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Post;
+use App\Zan;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -15,7 +17,9 @@ class PostController extends Controller
     */
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->paginate(6);
+        $posts = Post::orderBy('created_at', 'desc')
+            ->withCount("comments")
+            ->paginate(6);
         return view('post/index', compact('posts'));
     }
     /**
@@ -26,6 +30,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        $post->load('comments');
         return view('post/show', compact('post'));
     }
     /**
@@ -106,10 +111,60 @@ class PostController extends Controller
     }
     /**
      * 图片上传
+     *
+     * @author chenxingsheng
+     * @time 2019-11-19
     */
     public function imageUpload(Request $request)
     {
         $path = $request->file('wangEditorH5File')->storePublicly(md5(time()));
         return asset('storage/' . $path);
+    }
+
+    /**
+     * 提交评论
+     *
+     * @author chenxingsheng
+     * @time 2019-11-26
+    */
+    public function comment(Post $post)
+    {
+        $this->validate(request(), [
+            'content' => 'required|min:3',
+        ]);
+
+        $comment = new Comment();
+        $comment->user_id = \Auth::id();
+        $comment->content = request('content');
+        $post->comments()->save($comment);
+    }
+
+    /**
+     * 点赞
+     *
+     * @author chenxingsheng
+     * @time 2019-11-26
+    */
+    public function zan(Post $post)
+    {
+        $param = [
+            'user_id' => \Auth::id(),
+            'post_id' => $post->id,
+        ];
+
+        Zan::firstOrCreate($param);//此方法意为，有该记录就查询出来，没有就插入
+        return back();
+    }
+
+    /**
+     * 取消赞
+     *
+     * @author chenxingsheng
+     * @time 2019-11-26
+    */
+    public function unzan(Post $post)
+    {
+        $post->zan(\Auth::id())->delete();
+        return back();
     }
 }

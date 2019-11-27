@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Post;
 use App\Zan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -57,7 +58,7 @@ class PostController extends Controller
             'content' => 'required|string|min:10'
         ]);
 
-        $user_id = \Auth::id();
+        $user_id = Auth::id();
         $params = array_merge(request(['title', 'content']), compact('user_id'));
         $post = Post::create($params);
 
@@ -134,9 +135,11 @@ class PostController extends Controller
         ]);
 
         $comment = new Comment();
-        $comment->user_id = \Auth::id();
+        $comment->user_id = Auth::id();
         $comment->content = request('content');
         $post->comments()->save($comment);
+
+        return redirect("/posts/$post->id");
     }
 
     /**
@@ -148,7 +151,7 @@ class PostController extends Controller
     public function zan(Post $post)
     {
         $param = [
-            'user_id' => \Auth::id(),
+            'user_id' => Auth::id(),
             'post_id' => $post->id,
         ];
 
@@ -164,7 +167,7 @@ class PostController extends Controller
     */
     public function unzan(Post $post)
     {
-        $post->zan(\Auth::id())->delete();
+        $post->zan(Auth::id())->delete();
         return back();
     }
 }

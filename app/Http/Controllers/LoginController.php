@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -23,7 +24,7 @@ class LoginController extends Controller
         $userInfo = request(['email', 'password']);
         $isRemember = request('is_remember');
 
-        if(true == \Auth::attempt($userInfo, $isRemember)) {
+        if(true == Auth::attempt($userInfo, $isRemember)) {
             return redirect('/posts');
         }
 
@@ -33,7 +34,7 @@ class LoginController extends Controller
     //登出行为
     public function logout()
     {
-        \Auth::logout();
+        Auth::logout();
         return redirect('/login');
     }
 }

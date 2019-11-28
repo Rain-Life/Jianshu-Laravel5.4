@@ -29,6 +29,6 @@ class Post extends BaseModel
     public function zans()
     {
         //一篇文章有多个赞
-        $this->hasMany(\App\Zan::class);
+        $this->hasMany(\App\Zan::class)->orderBy('created_at', 'desc');
     }
 }

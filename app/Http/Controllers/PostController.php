@@ -170,4 +170,20 @@ class PostController extends Controller
         $post->zan(Auth::id())->delete();
         return back();
     }
+
+    /**
+     * 文章搜索页
+     *
+     * @author chenxingsheng
+     * @time 2019-11-29
+    */
+    public function search()
+    {
+        $this->validate(request(), [
+            'query' => 'required',
+        ]);
+        $query = request('query');
+        $posts = Post::search($query)->paginate(2);
+        return view('post/search', compact('posts', 'query'));
+    }
 }

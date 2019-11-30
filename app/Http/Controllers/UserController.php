@@ -17,4 +17,10 @@ class UserController extends Controller
     {
 
     }
+
+    //个人中心页面
+    public function show()
+    {
+        
+    }
 }

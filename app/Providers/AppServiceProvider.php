@@ -15,6 +15,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringlength(191);
+        //laravel中的视图合成器
+        \View::composer('layout.sidebar', function($view) {//在sidebar中注入专题模块（因为专题模块在右侧的公共部分）
+            $topics = \App\Topic::all();
+            $view->with('topics', $topics);
+        });
     }
 
     /**

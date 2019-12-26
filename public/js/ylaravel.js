@@ -1,10 +1,33 @@
+// var editor = new wangEditor('content');
+// editor.config.uploadImgUrl = "/posts/image/upload";
+// //设置headers
+// editor.config.uploadHeaders = {
+// 	'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+// };
+// editor.create();
+
+
 var editor = new wangEditor('content');
-editor.config.uploadImgUrl = "/posts/image/upload";
-//设置headers
-editor.config.uploadHeaders = {
-	'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
-};
-editor.create();
+if (editor.config) {
+	// 上传图片（举例）
+	editor.config.uploadImgUrl = '/posts/img/upload';
+
+	editor.config.uploadHeaders = {
+		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	};
+
+	// 隐藏掉插入网络图片功能。该配置，只有在你正确配置了图片上传功能之后才可用。
+	editor.config.hideLinkImg = true;
+	editor.create();
+}//这份富文本编辑器有点问题，后边再处理
+
+
+
+$.ajaxSetup({
+	headers:{
+		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	}
+});
 
 $(".preview_input").change(function (event) {
 	var file = event.currentTarget.files[0];

@@ -1,0 +1,17 @@
+<?php
+//后台
+Route::group(['prefix' => 'admin'], function () {
+    //登录页
+    Route::get('/login', '\App\Admin\Controllers\LoginController@index');
+    //登录行为
+    Route::post('/login', '\App\Admin\Controllers\LoginController@login');
+    //退出
+    Route::get('/logout', '\App\Admin\Controllers\LoginController@logout');
+
+    Route::group(['middleware' => 'auth:admin'], function () {
+        //后台首页
+        Route::get('/home', '\App\Admin\Controllers\homeController@index');
+    });
+
+});
+

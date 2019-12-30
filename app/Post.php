@@ -3,6 +3,7 @@
 namespace App;
 
 use App\BaseModel;
+use Illuminate\Database\Eloquent\Builder;
 use Laravel\Scout\Searchable;
 
 class Post extends BaseModel
@@ -47,5 +48,25 @@ class Post extends BaseModel
     {
         //一篇文章有多个赞
         $this->hasMany(\App\Zan::class)->orderBy('created_at', 'desc');
+    }
+
+    //一篇文章可能属于多个专题（获取到这篇文章有哪几个专题）
+    public function postTopics()
+    {
+        return $this->hasMany(\App\PostTopic::class, 'post_id', 'id');
+    }
+
+    //属于某个作者的文章
+    public function scopeAuthorBy(Builder $query, $user_id)
+    {
+        return $query->where('user_id', $user_id);
+    }
+
+    //不属于某个专题的文章
+    public function scopeTopicNotBy(Builder $query, $topic_id)
+    {
+        return $query->doesntHave('postTopics', 'and', function($q) use($topic_id) {
+            $q->where('topic_id', $topic_id);
+        });
     }
 }

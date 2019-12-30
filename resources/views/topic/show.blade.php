@@ -15,12 +15,12 @@
                         <h4 class="modal-title" id="myModalLabel">我的文章</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="/topic/1/submit">
+                        <form action="/topic/{{$topic->id}}/submit">
                             @foreach($myposts as $mypost)
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" name="post_ids[]" value="56">
-                                    dfdasfd
+                                    <input type="checkbox" name="post_ids[]" value="{{$mypost->id}}">
+                                    {{$mypost->title}}
                                 </label>
                             </div>
                             @endforeach

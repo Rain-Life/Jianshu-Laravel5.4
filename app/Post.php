@@ -69,4 +69,17 @@ class Post extends BaseModel
             $q->where('topic_id', $topic_id);
         });
     }
+
+    //全局scope的方式
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope("available", function(Builder $builder) {
+            $builder->whereIn("status", [0, 1]);
+        });
+    }
+
+
+
 }

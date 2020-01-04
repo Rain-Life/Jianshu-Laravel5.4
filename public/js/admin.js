@@ -10336,6 +10336,12 @@ return jQuery;
     }
 });
 
+$.ajaxSetup({
+	headers: {
+		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	}
+});
+
 $(".post-audit").click(function (event) {
     target = $(event.target);
     var post_id = target.attr("post-id");

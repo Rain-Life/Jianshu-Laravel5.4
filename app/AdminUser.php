@@ -36,4 +36,5 @@ class AdminUser extends Authenticatable
     {
         return $this->isInRoles($permission->roles);
     }
+    
 }

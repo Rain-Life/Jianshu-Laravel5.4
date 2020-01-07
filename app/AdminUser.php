@@ -16,25 +16,28 @@ class AdminUser extends Authenticatable
         $this->belongsToMany(\App\AdminRole::class, 'admin_role_user', 'user_id', 'role_id')
             ->withPivot(['user_id', 'role_id']);
     }
+
     //判断某个用户是否具有某个角色或某些角色
     public function isInRoles($roles)
     {
         return !!$roles->intersect($this->roles)->count();//intersect()取交集，!!返回bool值
     }
+
     //给用户分配角色
     public function assignRole($role)
     {
         $this->roles()->save($role);
     }
+
     //取消用户角色
     public function deleteRole($role)
     {
         return $this->roles()->detach($role);
     }
+    
     //用户是否有权限
     public function hasPermission($permission)
     {
         return $this->isInRoles($permission->roles);
     }
-    
 }

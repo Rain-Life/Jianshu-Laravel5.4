@@ -34,7 +34,7 @@ class AdminUser extends Authenticatable
     {
         return $this->roles()->detach($role);
     }
-    
+
     //用户是否有权限
     public function hasPermission($permission)
     {

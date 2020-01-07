@@ -16,10 +16,23 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/users', '\App\Admin\Controllers\UserController@index');
         Route::get('/users/create', '\App\Admin\Controllers\UserController@create');
         Route::post('/users/store', '\App\Admin\Controllers\UserController@store');
+        Route::get('/users/{user}/role', '\App\Admin\Controllers\UserController@role');//查看用户拥有的角色页
+        Route::post('/users/{user}/role', '\App\Admin\Controllers\UserController@storeRole');
+
+        //角色
+        Route::get('/roles', '\App\Admin\Controllers\RoleController@index');//角色列表
+        Route::get('/roles/create', '\App\Admin\Controllers\RoleController@create');//创建角色页
+        Route::get('/roles/store', '\App\Admin\Controllers\RoleController@store');//创建行为
+        Route::get('/roles/{user}/permission', '\App\Admin\Controllers\RoleController@permission');//查看用户拥有的角色页
+        Route::post('/roles/{user}/permission', '\App\Admin\Controllers\RoleController@storePermission');
+
+        //权限
+        
+
+        //审核模块
+        Route::get('/posts', '\App\Admin\Controllers\PostController@index');
+        Route::post('/posts/{post}/status', '\App\Admin\Controllers\PostController@status');
     });
 
-    //审核模块
-    Route::get('/posts', '\App\Admin\Controllers\PostController@index');
-    Route::post('/posts/{post}/status', '\App\Admin\Controllers\PostController@status');
 });
 

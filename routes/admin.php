@@ -27,7 +27,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/roles/{user}/permission', '\App\Admin\Controllers\RoleController@storePermission');
 
         //权限
-        
+        Route::get('/permissions', '\App\Admin\Controllers\PermissionController@index');//权限列表
+        Route::get('/permissions/create', '\App\Admin\Controllers\PermissionController@create');//创建权限页
+        Route::get('/permissions/store', '\App\Admin\Controllers\PermissionController@store');//创建行为
 
         //审核模块
         Route::get('/posts', '\App\Admin\Controllers\PostController@index');

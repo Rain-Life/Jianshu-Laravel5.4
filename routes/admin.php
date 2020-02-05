@@ -23,8 +23,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/roles', '\App\Admin\Controllers\RoleController@index');//角色列表
         Route::get('/roles/create', '\App\Admin\Controllers\RoleController@create');//创建角色页
         Route::get('/roles/store', '\App\Admin\Controllers\RoleController@store');//创建行为
-        Route::get('/roles/{user}/permission', '\App\Admin\Controllers\RoleController@permission');//查看用户拥有的角色页
-        Route::post('/roles/{user}/permission', '\App\Admin\Controllers\RoleController@storePermission');
+        Route::get('/roles/{role}/permission', '\App\Admin\Controllers\RoleController@permission');//查看用户拥有的角色页
+        Route::post('/roles/{role}/permission', '\App\Admin\Controllers\RoleController@storePermission');
 
         //权限
         Route::get('/permissions', '\App\Admin\Controllers\PermissionController@index');//权限列表

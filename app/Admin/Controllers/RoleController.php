@@ -33,23 +33,25 @@ class RoleController extends Controller
         //获取所有权限
         $permissions = \App\AdminPermission::all();
         //获取当前角色权限
-        $myPermissions = $role->permissions();
+        $myPermissions = $role->permissions();//我在数据库里边插入了相应的数据，但是还是获取不到，应该就是这个地方的问题
 
         return view("/admin/role/permission", compact('permissions', 'myPermissions', 'role'));
     }
 
     //储存角色权限行为
+    //todo  这块有些问题，到时候重新看一遍吧
     public function storePermission(\App\AdminRole $role)
     {
-        $this->validate(request(), [
+        $this->validate(request(),[
             'permissions' => 'required|array'
         ]);
 
-        $permissions = \App\AdminPermission::findMany(request('permissions'));
+        $permissions = \App\AdminPermission::find(request('permissions'));
         $myPermissions = $role->permissions();
 
-        //对已经有的权限
+        // 对已经有的权限
         $addPermissions = $permissions->diff($myPermissions);
+
         foreach ($addPermissions as $permission) {
             $role->grantPermission($permission);
         }

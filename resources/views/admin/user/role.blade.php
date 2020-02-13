@@ -21,7 +21,7 @@
                                     <div class="checkbox">
                                         <label>
                                             <input type="checkbox" name="roles[]"
-                                                   @if($myRoles->contains($role))
+                                                   @if(!empty($myRoles) && $myRoles->contains($role))
                                                    checked
                                                    @endif
                                                    value="{{$role->id}}">

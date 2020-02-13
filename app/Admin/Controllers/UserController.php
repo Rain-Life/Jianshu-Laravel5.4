@@ -36,7 +36,7 @@ class UserController extends Controller
     public function role(\App\AdminUser $user)
     {
         $roles = \App\AdminRole::all();
-        $myRoles = $user->roles();
+        $myRoles = $user->roles();//我在数据库里边插入了相应的数据，但是还是获取不到，应该就是这个地方的问题
 
         return view('/admin/user/role', compact('roles', 'myRoles', 'user'));
     }

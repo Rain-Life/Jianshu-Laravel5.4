@@ -19,7 +19,7 @@
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox" name="permissions[]"
-                                                @if($myPermission->contains($permission))
+                                                @if(!empty($myPermissions) && $myPermissions->contains($permission))
                                                     checked
                                                 @endif
                                                 value="{{$permission->id}}"

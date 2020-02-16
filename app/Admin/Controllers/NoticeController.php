@@ -22,7 +22,8 @@ class NoticeController extends Controller
            'content' => 'required|string'
         ]);
 
-        \App\Notice::create(request(['title', 'content']));
+        $notice = \App\Notice::create(request(['title', 'content']));
+        $this->dispatch(new \App\Jobs\SendMessage($notice));
 
         return redirect('/admin/notices');
     }

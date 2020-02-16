@@ -12,7 +12,7 @@ Route::group(['prefix' => 'admin'], function () {
         //后台首页
         Route::get('/home', '\App\Admin\Controllers\homeController@index');
 
-        //Route::group(['middleware' => 'can:system'], function () {
+        //Route::group(['middleware' => 'can:system'], function () {//打开权限之前，先打开Providers里边的AuthServiceProvider
             //人员管理模块
             Route::get('/users', '\App\Admin\Controllers\UserController@index');
             Route::get('/users/create', '\App\Admin\Controllers\UserController@create');
@@ -33,12 +33,16 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/permissions/store', '\App\Admin\Controllers\PermissionController@store');//创建行为
         //});
 
-        //Route::group(['middleware' => 'can:system'], function () {
+        //Route::group(['middleware' => 'can:post'], function () {
             //审核模块
             Route::get('/posts', '\App\Admin\Controllers\PostController@index');
             Route::post('/posts/{post}/status', '\App\Admin\Controllers\PostController@status');
         //});
 
+        //专题模块
+        //Route::group(['middleware' => 'can:topic'], function () {
+            Route::resource('topics', '\App\Admin\Controllers\TopicController', ['only' => ['index', 'store', 'create', 'destroy']]);
+        //});
     });
 
 });

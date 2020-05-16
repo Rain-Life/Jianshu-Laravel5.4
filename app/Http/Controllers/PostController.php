@@ -13,7 +13,7 @@ class PostController extends Controller
     /**
      * 文章列表页
      *
-     * @author chenxingsheng
+     * @author Liangyu
      * @time 2019-11-19
     */
     public function index()
@@ -26,7 +26,7 @@ class PostController extends Controller
     /**
      * 文章详情页
      *
-     * @author chenxingsheng
+     * @author Liangyu
      * @time 2019-11-19
      */
     public function show(Post $post)
@@ -37,7 +37,7 @@ class PostController extends Controller
     /**
      * 创建文章页
      *
-     * @author chenxingsheng
+     * @author Liangyu
      * @time 2019-11-19
      */
     public function create()
@@ -47,7 +47,7 @@ class PostController extends Controller
     /**
      * 创建文章逻辑
      *
-     * @author chenxingsheng
+     * @author Liangyu
      * @time 2019-11-19
      */
     public function store()
@@ -67,7 +67,7 @@ class PostController extends Controller
     /**
      * 编辑文章页
      *
-     * @author chenxingsheng
+     * @author Liangyu
      * @time 2019-11-19
      */
     public function edit(Post $post)
@@ -77,7 +77,7 @@ class PostController extends Controller
     /**
      * 编辑文章逻辑
      *
-     * @author chenxingsheng
+     * @author Liangyu
      * @time 2019-11-19
      */
     public function update(Post $post)
@@ -99,7 +99,7 @@ class PostController extends Controller
     /**
      * 删除文章
      *
-     * @author chenxingsheng
+     * @author Liangyu
      * @time 2019-11-19
      */
     public function delete(Post $post)
@@ -113,7 +113,7 @@ class PostController extends Controller
     /**
      * 图片上传
      *
-     * @author chenxingsheng
+     * @author Liangyu
      * @time 2019-11-19
     */
     public function imageUpload(Request $request)
@@ -125,7 +125,7 @@ class PostController extends Controller
     /**
      * 提交评论
      *
-     * @author chenxingsheng
+     * @author Liangyu
      * @time 2019-11-26
     */
     public function comment(Post $post)
@@ -145,7 +145,7 @@ class PostController extends Controller
     /**
      * 点赞
      *
-     * @author chenxingsheng
+     * @author Liangyu
      * @time 2019-11-26
     */
     public function zan(Post $post)
@@ -162,7 +162,7 @@ class PostController extends Controller
     /**
      * 取消赞
      *
-     * @author chenxingsheng
+     * @author Liangyu
      * @time 2019-11-26
     */
     public function unzan(Post $post)
@@ -174,7 +174,7 @@ class PostController extends Controller
     /**
      * 文章搜索页
      *
-     * @author chenxingsheng
+     * @author Liangyu
      * @time 2019-11-29
     */
     public function search()
